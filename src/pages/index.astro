@@ -1,5 +1,7 @@
 ---
 import '../styles/globals.css'
+import { ModeToggle } from '@/components/ModeToggle';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <script is:inline>
@@ -21,11 +23,13 @@ import '../styles/globals.css'
 	}
 </script>
 
-<html lang="en">
-	<body>
-      <h1>EverEarlier</h1>
-	</body>
-</html>
+<Layout title="EverEarlier">
+	<main>
+		<h2 class="text-2xl font-bold tracking-tight">EverEarlier</h2>
+		<ModeToggle client:load/>
+
+	</main>
+</Layout>
 </script>
 
 
