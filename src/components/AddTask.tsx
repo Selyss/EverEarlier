@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -29,6 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn, useMediaQuery } from "@/lib/utils";
+import * as React from "react";
 
 export function AddTodoTask() {
   const [open, setOpen] = React.useState(false);
@@ -81,16 +80,16 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
     <form className={cn("grid items-start gap-4", className)}>
       <div className="grid gap-2">
         <Label htmlFor="text">Name</Label>
-        <Input type="text" id="text" defaultValue="Clean Room" />
+        <Input type="text" id="title" defaultValue="Clean Room" required />
       </div>
       <div className="grid grid-cols-2 gap-2">
         <div>
           <Label htmlFor="priority">Priority</Label>
-          <Select>
+          <Select required name="priority">
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Task Priority" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent id="priority">
               <SelectItem value="light">Low</SelectItem>
               <SelectItem value="dark">Medium</SelectItem>
               <SelectItem value="system">High</SelectItem>
@@ -98,12 +97,12 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
           </Select>
         </div>
         <div>
-          <Label htmlFor="priority">Priority</Label>
-          <Select>
+          <Label htmlFor="progress">Progress</Label>
+          <Select required name="progress">
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Current Progress" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent id="progress">
               <SelectItem value="light">To Do</SelectItem>
               <SelectItem value="dark">In Progress</SelectItem>
               <SelectItem value="system">Completed</SelectItem>
