@@ -23,10 +23,40 @@ import Layout from "../layouts/Layout.astro";
 	}
 </script>
 
+<script>
+type Task = {
+  name: string
+  id: string
+  priority: number
+  completed: boolean
+}
+ 
+export const tasks: Task[] = [
+  {
+	name: "Make bed"
+    id: "489e1d42",
+    priority: 1,
+	completed: false,
+  },
+  {
+	name: "Clean Room",
+    id: "728ed52f",
+    priority: 5,
+	completed: true,
+  },
+  // ...
+]
+</script>
+
 <Layout title="EverEarlier">
-	<main>
+	<main class="h-screen">
 		<h2 class="text-2xl font-bold tracking-tight">EverEarlier</h2>
-		<ModeToggle client:load/>
+		<p class="text-lg text-muted-foreground">Let's crush some tasks!</p>
+
+		<div class="dark-mode-container">
+
+		<ModeToggle client:load />
+		</div>
 
 	</main>
 </Layout>
@@ -34,6 +64,14 @@ import Layout from "../layouts/Layout.astro";
 
 
 <style>
+	.dark-mode-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 9999;
+	padding: 1rem;
+	}
+
   main {
     margin: auto;
     padding: 1rem;
