@@ -1,55 +1,54 @@
 ---
-import '../styles/globals.css';
-import { ModeToggle } from '@/components/ModeToggle';
+import "../styles/globals.css";
+import { ModeToggle } from "@/components/ModeToggle";
 import Layout from "../layouts/Layout.astro";
-import { DemoPage } from '@/components/Page';
+import DemoPage from "@/components/Page";
 ---
 
 <script is:inline>
-	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	};
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
 
-	if (typeof localStorage !== 'undefined') {
-		const observer = new MutationObserver(() => {
-			const isDark = document.documentElement.classList.contains('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-	}
+  if (typeof localStorage !== "undefined") {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
 </script>
-
 
 <Layout title="EverEarlier">
-	<main class="h-screen">
-		<h2 class="text-2xl font-bold tracking-tight">EverEarlier</h2>
-		<p class="text-lg text-muted-foreground">Let's crush some tasks!</p>
+  <main class="h-screen">
+    <h2 class="text-2xl font-bold tracking-tight">EverEarlier</h2>
+    <p class="text-lg text-muted-foreground">Let's crush some tasks!</p>
 
-		<div class="dark-mode-container">
-
-		<ModeToggle client:load />
-		</div>
-		<DemoPage client:load/>
-
-
-	</main>
+    <div class="dark-mode-container">
+      <ModeToggle client:load />
+    </div>
+    <DemoPage client:idle />
+  </main>
 </Layout>
-</script>
-
 
 <style>
-	.dark-mode-container {
-	position: fixed;
-	top: 0;
-	right: 0;
-	z-index: 9999;
-	padding: 1rem;
-	}
+  .dark-mode-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 1rem;
+  }
 
   main {
     margin: auto;

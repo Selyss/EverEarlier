@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { type ColumnDef } from "@tanstack/react-table"
+import { type ColumnDef } from "@tanstack/react-table";
 
 export type Task = {
-  name: string
-  id: string
-  priority: number
-  completed: boolean
-}
+  name: string;
+  id: string;
+  priority: number;
+  completed: boolean;
+};
 
 export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Task",
   },
   {
     accessorKey: "priority",
@@ -22,4 +22,4 @@ export const columns: ColumnDef<Task>[] = [
     accessorKey: "completed",
     header: "Completed",
   },
-]
+];
