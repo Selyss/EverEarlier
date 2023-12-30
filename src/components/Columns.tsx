@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteTask } from "@/lib/utils";
 
 export type Task = {
   name: string;
@@ -69,9 +70,11 @@ export const columns: ColumnDef<Task>[] = [
             >
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem>Duplicate</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => true}>Duplicate</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => deleteTask(row.original.id)}>
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
