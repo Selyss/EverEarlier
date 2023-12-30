@@ -9,25 +9,25 @@ async function getData(): Promise<Task[]> {
       name: "Clean Room",
       id: "728ed52f",
       priority: "High",
-      completed: false,
+      status: "In Progress",
     },
     {
       name: "Make Bed",
       id: "528ed52f",
       priority: "Low",
-      completed: true,
+      status: "Completed",
     },
     {
       name: "Finish Work",
       id: "128ed52f",
       priority: "Medium",
-      completed: true,
+      status: "To Do",
     },
     // ...
   ];
 }
 
-export default function DemoPage() {
+export default function TodoList() {
   const [data, setData] = useState<Task[]>([]);
 
   useEffect(() => {
