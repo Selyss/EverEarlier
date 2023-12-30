@@ -8,13 +8,19 @@ async function getData(): Promise<Task[]> {
     {
       name: "Clean Room",
       id: "728ed52f",
-      priority: 1,
+      priority: "High",
       completed: false,
     },
     {
       name: "Make Bed",
       id: "528ed52f",
-      priority: 2,
+      priority: "Low",
+      completed: true,
+    },
+    {
+      name: "Finish Work",
+      id: "128ed52f",
+      priority: "Medium",
       completed: true,
     },
     // ...
