@@ -1,7 +1,8 @@
 ---
-import '../styles/globals.css'
+import '../styles/globals.css';
 import { ModeToggle } from '@/components/ModeToggle';
 import Layout from "../layouts/Layout.astro";
+import { DemoPage } from '@/components/Page';
 ---
 
 <script is:inline>
@@ -23,30 +24,6 @@ import Layout from "../layouts/Layout.astro";
 	}
 </script>
 
-<script>
-type Task = {
-  name: string
-  id: string
-  priority: number
-  completed: boolean
-}
- 
-export const tasks: Task[] = [
-  {
-	name: "Make bed"
-    id: "489e1d42",
-    priority: 1,
-	completed: false,
-  },
-  {
-	name: "Clean Room",
-    id: "728ed52f",
-    priority: 5,
-	completed: true,
-  },
-  // ...
-]
-</script>
 
 <Layout title="EverEarlier">
 	<main class="h-screen">
@@ -57,6 +34,8 @@ export const tasks: Task[] = [
 
 		<ModeToggle client:load />
 		</div>
+		<DemoPage client:load/>
+
 
 	</main>
 </Layout>
