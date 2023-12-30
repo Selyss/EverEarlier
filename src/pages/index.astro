@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import { ModeToggle } from "@/components/ModeToggle";
 import Layout from "../layouts/Layout.astro";
 import TodoList from "@/components/Page";
+import { AddTodoTask } from "@/components/AddTask";
 ---
 
 <script is:inline>
@@ -38,6 +39,7 @@ import TodoList from "@/components/Page";
       <ModeToggle client:load />
     </div>
     <TodoList client:load />
+    <AddTodoTask client:load />
   </main>
 </Layout>
 
