@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { type ColumnDef } from "@tanstack/react-table";
 
 export type Task = {
@@ -21,5 +22,13 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "completed",
     header: "Completed",
+    cell: ({ row }) => {
+      const value = row.original.completed;
+      return (
+        <Badge variant={value ? "default" : "destructive"}>
+          {value ? "Yes" : "No"}
+        </Badge>
+      );
+    },
   },
 ];
