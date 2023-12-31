@@ -19,7 +19,15 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Form } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -48,10 +56,10 @@ const FormSchema = z.object({
   }),
 });
 export function AddTodoTask() {
-  const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
+    return <ProfileForm />;
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
@@ -108,6 +116,42 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
       ),
     });
   }
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={cn("grid items-start gap-4", className)}
+      >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="m@example.com">m@example.com</SelectItem>
+                  <SelectItem value="m@google.com">m@google.com</SelectItem>
+                  <SelectItem value="m@support.com">m@support.com</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                You can manage email addresses in your{" "}
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  );
+
   return (
     <Form {...form}>
       <form
