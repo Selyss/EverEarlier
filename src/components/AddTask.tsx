@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -26,9 +28,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "@/components/ui/use-toast";
 import { cn, useMediaQuery } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as React from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
+const FormSchema = z.object({
+  name: z.string({
+    required_error: "Please select a name for the task.",
+  }),
+  priority: z.string({
+    required_error: "Please select a priority for the task.",
+  }),
+  progress: z.string({
+    required_error: "Please select your current progress.",
+  }),
+});
 export function AddTodoTask() {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -76,20 +93,34 @@ export function AddTodoTask() {
 }
 
 function ProfileForm({ className }: React.ComponentProps<"form">) {
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
+  }
   return (
     <form className={cn("grid items-start gap-4", className)}>
       <div className="grid gap-2">
-        <Label htmlFor="text">Name</Label>
-        <Input type="text" id="title" defaultValue="Clean Room" required />
+        <Label htmlFor="title">Name</Label>
+        <Input type="text" id="title" defaultValue="Clean Room" />
       </div>
       <div className="grid grid-cols-2 gap-2">
         <div>
           <Label htmlFor="priority">Priority</Label>
-          <Select required name="priority">
+          <Select name="priority">
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Task Priority" />
             </SelectTrigger>
-            <SelectContent id="priority">
+            <SelectContent>
               <SelectItem value="light">Low</SelectItem>
               <SelectItem value="dark">Medium</SelectItem>
               <SelectItem value="system">High</SelectItem>
@@ -98,11 +129,11 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
         </div>
         <div>
           <Label htmlFor="progress">Progress</Label>
-          <Select required name="progress">
+          <Select name="progress">
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Current Progress" />
             </SelectTrigger>
-            <SelectContent id="progress">
+            <SelectContent>
               <SelectItem value="light">To Do</SelectItem>
               <SelectItem value="dark">In Progress</SelectItem>
               <SelectItem value="system">Completed</SelectItem>
