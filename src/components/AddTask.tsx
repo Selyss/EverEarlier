@@ -19,6 +19,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -108,40 +109,45 @@ function ProfileForm({ className }: React.ComponentProps<"form">) {
     });
   }
   return (
-    <form className={cn("grid items-start gap-4", className)}>
-      <div className="grid gap-2">
-        <Label htmlFor="title">Name</Label>
-        <Input type="text" id="title" defaultValue="Clean Room" />
-      </div>
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <Label htmlFor="priority">Priority</Label>
-          <Select name="priority">
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Task Priority" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Low</SelectItem>
-              <SelectItem value="dark">Medium</SelectItem>
-              <SelectItem value="system">High</SelectItem>
-            </SelectContent>
-          </Select>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={cn("grid items-start gap-4", className)}
+      >
+        <div className="grid gap-2">
+          <Label htmlFor="title">Name</Label>
+          <Input type="text" id="title" defaultValue="Clean Room" />
         </div>
-        <div>
-          <Label htmlFor="progress">Progress</Label>
-          <Select name="progress">
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Current Progress" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">To Do</SelectItem>
-              <SelectItem value="dark">In Progress</SelectItem>
-              <SelectItem value="system">Completed</SelectItem>
-            </SelectContent>
-          </Select>
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <Label htmlFor="priority">Priority</Label>
+            <Select name="priority">
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Task Priority" />
+              </SelectTrigger>
+              <SelectContent id="priority">
+                <SelectItem value="light">Low</SelectItem>
+                <SelectItem value="dark">Medium</SelectItem>
+                <SelectItem value="system">High</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label htmlFor="progress">Progress</Label>
+            <Select name="progress">
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Current Progress" />
+              </SelectTrigger>
+              <SelectContent id="progress">
+                <SelectItem value="light">To Do</SelectItem>
+                <SelectItem value="dark">In Progress</SelectItem>
+                <SelectItem value="system">Completed</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
-      </div>
-      <Button type="submit">Save changes</Button>
-    </form>
+        <Button type="submit">Save changes</Button>
+      </form>
+    </Form>
   );
 }
