@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -99,7 +98,6 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
     },
   });
   function onSubmit(values: z.infer<typeof TaskSchema>) {
-    toast("Task created: " + values.name);
     createTask(values as Task);
   }
 
