@@ -101,8 +101,7 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
   const form = useForm<z.infer<typeof TaskSchema>>({
     resolver: zodResolver(TaskSchema),
     defaultValues: {
-      name: "",
-      // description: "",
+      description: "",
     },
   });
   function onSubmit(values: z.infer<typeof TaskSchema>) {
@@ -110,8 +109,9 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
     saveTasks([
       ...JSON.parse(localStorage.getItem("tasks") || "[]"),
       {
-        id: Math.random().toString(),
         name: values.name,
+        id: values.id,
+        description: values.description,
         priority: values.priority,
         progress: values.progress,
       },

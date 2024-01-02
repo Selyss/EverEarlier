@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { type ColumnDef } from "@tanstack/react-table";
 
 import TaskDropdown from "./TaskDropdown";
+import { Progress } from "./ui/progress";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -15,18 +16,18 @@ export const columns: ColumnDef<Task>[] = [
     accessorKey: "priority",
     header: "Priority",
     cell: ({ row }) => {
-      const value = row.original.priority;
+      const priority = row.original.priority;
       return (
         <Badge
           variant={
-            value === "High"
+            priority === "High"
               ? "destructive"
-              : value === "Medium"
+              : priority === "Medium"
               ? "secondary"
               : "outline"
           }
         >
-          {value}
+          {priority}
         </Badge>
       );
     },
@@ -34,6 +35,16 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "progress",
     header: "Progress",
+    cell: ({ row }) => {
+      const progress = row.original.progress;
+      return (
+        <Progress
+          value={
+            progress === "To Do" ? 0 : progress === "In Progress" ? 50 : 100
+          }
+        />
+      );
+    },
   },
   {
     id: "actions",

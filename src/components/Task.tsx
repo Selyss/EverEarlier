@@ -6,9 +6,7 @@ export const TaskSchema = z.object({
   name: z.string().min(1, {
     message: "Title must not be empty.",
   }),
-  description: z.string().min(1, {
-    message: "Description must not be empty.",
-  }),
+  description: z.string(),
   id: z.string().uuid(),
   priority: z.enum(["High", "Medium", "Low"]),
   progress: z.enum(["To Do", "In Progress", "Completed"]),
@@ -24,6 +22,7 @@ export type Task = {
 
 /* generate unique task id */
 function generateTaskId(): string {
+  // its probably unique...
   return uuidv4();
 }
 
@@ -41,6 +40,7 @@ export function saveTasks(tasks: Task[]): void {
 
 /* create a new task */
 export function createTask(task: Task): void {
+  task.id = generateTaskId();
   const tasks = getTasks();
   tasks.push(task);
   saveTasks(tasks);
