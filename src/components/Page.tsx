@@ -10,8 +10,9 @@ async function getData(): Promise<Task[] | undefined> {
   // todo: no saved tasks
 }
 
-function saveData(tasks: Task[]) {
+export function saveTaskData(tasks: Task[]) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // FIXME: refresh list
 }
 
 export default function TodoList() {
@@ -22,7 +23,7 @@ export default function TodoList() {
   }, []);
 
   useEffect(() => {
-    saveData(data);
+    saveTaskData(data);
   }, [data]);
   return (
     <div className="container mx-auto py-10">

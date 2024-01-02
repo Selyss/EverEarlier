@@ -43,6 +43,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { saveTaskData } from "./Page";
 
 export function AddTask() {
   const [open, setOpen] = React.useState(false);
@@ -111,6 +112,15 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     toast("Task created: " + values.title);
+    saveTaskData([
+      ...JSON.parse(localStorage.getItem("tasks") || "[]"),
+      {
+        id: Math.random().toString(),
+        name: values.title,
+        priority: values.priority,
+        status: values.progress,
+      },
+    ]);
   }
 
   return (
