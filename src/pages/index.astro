@@ -3,7 +3,8 @@ import "../styles/globals.css";
 import { ModeToggle } from "@/components/ModeToggle";
 import Layout from "../layouts/Layout.astro";
 import TodoList from "@/components/Page";
-import { AddTodoTask } from "@/components/AddTask";
+import { TaskForm } from "@/components/AddTask";
+import { Toaster } from "@/components/ui/sonner";
 ---
 
 <script is:inline>
@@ -31,15 +32,16 @@ import { AddTodoTask } from "@/components/AddTask";
 </script>
 
 <Layout title="EverEarlier">
+  <Toaster client:load />
   <main class="h-screen">
     <h2 class="text-2xl font-bold tracking-tight">EverEarlier</h2>
     <p class="text-lg text-muted-foreground">Let's crush some tasks!</p>
 
     <div class="dark-mode-container">
-      <ModeToggle client:load />
+      <ModeToggle client:idle />
     </div>
     <TodoList client:load />
-    <AddTodoTask client:load />
+    <TaskForm client:load />
   </main>
 </Layout>
 
