@@ -37,6 +37,10 @@
     "tailwindcss": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.3.3",
+    "uuid": "^9.0.1",
     "vaul": "^0.8.0"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.7"
   }
 }

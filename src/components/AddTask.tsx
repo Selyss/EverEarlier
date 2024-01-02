@@ -43,9 +43,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { type Task } from "./Columns";
 import { saveTaskData } from "./Page";
+import { TaskSchema } from "./Task";
 
-export function AddTask() {
+interface AddTaskProps {
+  onTaskAdded: (task: Task) => void;
+}
+
+const AddTask: React.FC<AddTaskProps> = ({ onTaskAdded }) => {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -89,34 +95,25 @@ export function AddTask() {
       </DrawerContent>
     </Drawer>
   );
-}
+};
 
-const formSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters long.",
-  }),
-  priority: z.string(),
-  progress: z.string(),
-  // description: z.string().min(2, { // TODO: impl later
-  //   message: "Description must be at least 2 characters long.",
-  // }),
-});
+export { AddTask };
 
 export function TaskForm({ className }: React.ComponentProps<"form">) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof TaskSchema>>({
+    resolver: zodResolver(TaskSchema),
     defaultValues: {
-      title: "",
+      name: "",
       // description: "",
     },
   });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast("Task created: " + values.title);
+  function onSubmit(values: z.infer<typeof TaskSchema>) {
+    toast("Task created: " + values.name);
     saveTaskData([
       ...JSON.parse(localStorage.getItem("tasks") || "[]"),
       {
         id: Math.random().toString(),
-        name: values.title,
+        name: values.name,
         priority: values.priority,
         status: values.progress,
       },
@@ -129,7 +126,7 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="title"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Task Name</FormLabel>
