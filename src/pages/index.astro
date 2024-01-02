@@ -41,7 +41,8 @@ import { Toaster } from "@/components/ui/sonner";
       <ModeToggle client:idle />
     </div>
     <TodoList client:load />
-    <AddTask client:load />
+
+    <AddTask client:load onTaskAdded={() => {}} />
   </main>
 </Layout>
 

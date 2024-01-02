@@ -20,6 +20,7 @@ import * as React from "react";
 
 import { useMediaQuery } from "@/lib/utils";
 
+import { TaskSchema, saveTasks, type Task } from "@/components/Task";
 import {
   Dialog,
   DialogContent,
@@ -43,9 +44,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { type Task } from "./Columns";
-import { saveTaskData } from "./Page";
-import { TaskSchema } from "./Task";
 
 interface AddTaskProps {
   onTaskAdded: (task: Task) => void;
@@ -109,13 +107,13 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
   });
   function onSubmit(values: z.infer<typeof TaskSchema>) {
     toast("Task created: " + values.name);
-    saveTaskData([
+    saveTasks([
       ...JSON.parse(localStorage.getItem("tasks") || "[]"),
       {
         id: Math.random().toString(),
         name: values.name,
         priority: values.priority,
-        status: values.progress,
+        progress: values.progress,
       },
     ]);
     window.location.reload(); // HACK:

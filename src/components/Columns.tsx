@@ -1,16 +1,10 @@
 "use client";
 
+import { type Task } from "@/components/Task";
 import { Badge } from "@/components/ui/badge";
 import { type ColumnDef } from "@tanstack/react-table";
 
 import TaskDropdown from "./TaskDropdown";
-
-export type Task = {
-  name: string;
-  id: string;
-  priority: "High" | "Medium" | "Low";
-  status: "To Do" | "In Progress" | "Completed";
-};
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -38,8 +32,8 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "progress",
+    header: "Progress",
   },
   {
     id: "actions",

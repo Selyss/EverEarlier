@@ -1,5 +1,6 @@
 import { MoreHorizontal } from "lucide-react";
 
+import { EditTask } from "@/components/task-actions/EditTask";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -8,11 +9,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import * as React from "react";
 
+import { type Task } from "@/components/Task";
 import { type Row } from "@tanstack/react-table";
-import { type Task } from "./Columns";
 
 export default function TaskDropdown(row: Row<Task>): JSX.Element {
+  const [editingTask, setEditingTask] = React.useState(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = React.useState(false);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,7 +28,10 @@ export default function TaskDropdown(row: Row<Task>): JSX.Element {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem
-          onClick={() => true} // todo: open modal
+          onClick={() => {
+            setEditingTask(row.original);
+            setIsEditDialogOpen(true);
+          }}
         >
           Edit
         </DropdownMenuItem>
@@ -33,6 +41,14 @@ export default function TaskDropdown(row: Row<Task>): JSX.Element {
           Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
+      {editingTask && (
+        <EditTask
+          task={editingTask}
+          onTaskUpdated={(updatedTask) => {
+            setIsEditDialogOpen(false);
+          }}
+        />
+      )}
     </DropdownMenu>
   );
 }

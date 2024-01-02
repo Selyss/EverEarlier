@@ -19,7 +19,7 @@ export type Task = {
   description: string;
   id: string;
   priority: "High" | "Medium" | "Low";
-  status: "To Do" | "In Progress" | "Completed";
+  progress: "To Do" | "In Progress" | "Completed";
 };
 
 /* generate unique task id */
@@ -28,13 +28,14 @@ function generateTaskId(): string {
 }
 
 /* retrieve tasks from local storage */
-function getTasks(): Task[] {
+export function getTasks(): Task[] {
+  /* INFO: retrieving tasks from local storage is synchronous */
   const tasks = localStorage.getItem("tasks");
   return tasks ? JSON.parse(tasks) : [];
 }
 
 /* save tasks to local storage */
-function saveTasks(tasks: Task[]): void {
+export function saveTasks(tasks: Task[]): void {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
@@ -46,7 +47,7 @@ export function createTask(task: Task): void {
 }
 
 /* update a task */
-function updateTask(updatedTask: Task): void {
+export function updateTask(updatedTask: Task): void {
   const tasks = getTasks();
   const taskIndex = tasks.findIndex((task) => task.id === updatedTask.id);
   /* checking if the task index is found*/
@@ -57,7 +58,7 @@ function updateTask(updatedTask: Task): void {
 }
 
 /* duplicate a task */
-function duplicateTask(taskId: string): void {
+export function duplicateTask(taskId: string): void {
   const tasks = getTasks();
   const taskToDuplicate = tasks.find((task) => task.id === taskId);
   if (taskToDuplicate) {
