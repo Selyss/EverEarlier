@@ -121,6 +121,7 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
         status: values.progress,
       },
     ]);
+    window.location.reload(); // HACK:
   }
 
   return (
