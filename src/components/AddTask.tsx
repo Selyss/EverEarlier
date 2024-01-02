@@ -20,7 +20,7 @@ import * as React from "react";
 
 import { useMediaQuery } from "@/lib/utils";
 
-import { TaskSchema, saveTasks, type Task } from "@/components/Task";
+import { TaskSchema, createTask, type Task } from "@/components/Task";
 import {
   Dialog,
   DialogContent,
@@ -45,11 +45,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface AddTaskProps {
-  onTaskAdded: (task: Task) => void;
-}
-
-const AddTask: React.FC<AddTaskProps> = ({ onTaskAdded }) => {
+export default function AddTask() {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -93,9 +89,7 @@ const AddTask: React.FC<AddTaskProps> = ({ onTaskAdded }) => {
       </DrawerContent>
     </Drawer>
   );
-};
-
-export { AddTask };
+}
 
 export function TaskForm({ className }: React.ComponentProps<"form">) {
   const form = useForm<z.infer<typeof TaskSchema>>({
@@ -106,17 +100,7 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
   });
   function onSubmit(values: z.infer<typeof TaskSchema>) {
     toast("Task created: " + values.name);
-    saveTasks([
-      ...JSON.parse(localStorage.getItem("tasks") || "[]"),
-      {
-        name: values.name,
-        id: values.id,
-        description: values.description,
-        priority: values.priority,
-        progress: values.progress,
-      },
-    ]);
-    window.location.reload(); // HACK:
+    createTask(values as Task);
   }
 
   return (

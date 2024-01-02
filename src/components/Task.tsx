@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import * as z from "zod";
 
@@ -44,16 +45,18 @@ export function createTask(task: Task): void {
   const tasks = getTasks();
   tasks.push(task);
   saveTasks(tasks);
+  toast.success("Task created: " + task.name);
 }
 
 /* update a task */
 export function updateTask(updatedTask: Task): void {
   const tasks = getTasks();
   const taskIndex = tasks.findIndex((task) => task.id === updatedTask.id);
-  /* checking if the task index is found*/
+  /* checking if the task index is found */
   if (taskIndex !== -1) {
     tasks[taskIndex] = updatedTask;
     saveTasks(tasks);
+    toast.success("Task edited"); // FIXME: make it say the name
   }
 }
 
@@ -65,6 +68,7 @@ export function duplicateTask(taskId: string): void {
     const duplicatedTask = { ...taskToDuplicate, id: generateTaskId() };
     tasks.push(duplicatedTask);
     saveTasks(tasks);
+    toast.success("Task: " + duplicatedTask.name + " has been duplicated");
   }
 }
 
@@ -73,4 +77,5 @@ function deleteTask(taskId: string): void {
   const tasks = getTasks();
   const updatedTasks = tasks.filter((task) => task.id !== taskId);
   saveTasks(updatedTasks);
+  toast.warning("Deleted Task"); // TODO: make it say name
 }
