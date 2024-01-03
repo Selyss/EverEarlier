@@ -1,14 +1,13 @@
 import { columns } from "@/components/Columns";
 import { DataTable } from "@/components/DataTable";
-import { getTasks, saveTasks, type Task } from "@/components/Task";
+import { getTasks, saveTasks } from "@/components/Task";
 import { useEffect, useState } from "react";
 
 export default function TodoList() {
-  const [data, setData] = useState<Task[]>([]);
+  const [data, setData] = useState(getTasks());
 
   useEffect(() => {
-    const tasks = getTasks();
-    setData(tasks);
+    setData(getTasks());
   }, []);
 
   useEffect(() => {

@@ -29,8 +29,12 @@ function generateTaskId(): string {
 /* retrieve tasks from local storage */
 export function getTasks(): Task[] {
   /* INFO: retrieving tasks from local storage is synchronous */
-  const tasks = localStorage.getItem("tasks");
-  return tasks ? JSON.parse(tasks) : [];
+  if (typeof window !== "undefined") {
+    /* we are in the browser */
+    const tasks = localStorage.getItem("tasks");
+    return tasks ? JSON.parse(tasks) : [];
+  }
+  return [];
 }
 
 /* save tasks to local storage */
