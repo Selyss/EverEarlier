@@ -32,12 +32,13 @@ import { Toaster } from "@/components/ui/sonner";
 </script>
 
 <Layout title="EverEarlier">
+  <!--needed? i kinda deleted the file... :FIXME -->
   <Toaster client:idle />
   <main class="h-screen">
     <h2 class="text-2xl font-bold tracking-tight">EverEarlier</h2>
     <p class="text-lg text-muted-foreground">Let's crush some tasks!</p>
 
-    <div class="dark-mode-container">
+    <div class="fixed top-0 right-0 z-39 p-4">
       <ModeToggle client:idle />
     </div>
     <TodoList client:load />
@@ -46,14 +47,6 @@ import { Toaster } from "@/components/ui/sonner";
 </Layout>
 
 <style>
-  .dark-mode-container {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 9999;
-    padding: 1rem;
-  }
-
   main {
     margin: auto;
     padding: 1rem;

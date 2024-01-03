@@ -7,8 +7,7 @@ export const TaskSchema = z.object({
   name: z.string().min(1, {
     message: "Title must not be empty.",
   }),
-  description: z.string(),
-  id: z.string().uuid(),
+  description: z.string().optional(),
   priority: z.enum(["High", "Medium", "Low"]),
   progress: z.enum(["To Do", "In Progress", "Completed"]),
 });

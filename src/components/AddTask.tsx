@@ -79,7 +79,7 @@ export default function AddTask() {
             Add a new task to your list. Click save when you're done.
           </DrawerDescription> */}
         </DrawerHeader>
-        <TaskForm className="px-4" />
+        <TaskForm />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -90,13 +90,11 @@ export default function AddTask() {
   );
 }
 
-export function TaskForm({ className }: React.ComponentProps<"form">) {
+export function TaskForm() {
   const form = useForm<z.infer<typeof TaskSchema>>({
     resolver: zodResolver(TaskSchema),
-    defaultValues: {
-      description: "",
-    },
   });
+
   function onSubmit(values: z.infer<typeof TaskSchema>) {
     createTask(values as Task);
   }
@@ -161,7 +159,7 @@ export function TaskForm({ className }: React.ComponentProps<"form">) {
             </FormItem>
           )}
         />
-        <Button type="submit">Create new task</Button>
+        <Button type="submit">Create task</Button>
       </form>
     </Form>
   );
