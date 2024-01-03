@@ -74,3 +74,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+@font-face {
+  font-family: 'Geist-Regular';
+  src: url('/fonts/Geist-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

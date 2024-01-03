@@ -46,6 +46,7 @@ export function DataTablePagination<TData>({
                   {pageSize}
                 </SelectItem>
               ))}
+              {/* add sr-only tag TODO: */}
             </SelectContent>
           </Select>
         </div>
