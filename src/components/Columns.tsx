@@ -5,10 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { type ColumnDef } from "@tanstack/react-table";
 
 import TaskDropdown from "@/components/TaskDropdown";
-import { Button } from "@/components/ui/button";
+import { DataTableColumnHeader } from "@/components/table/ColumnHeader";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
-import { ArrowUpDown } from "lucide-react";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -39,17 +38,10 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "priority",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")} // FIXME: this doesnt work, it needs to sort by priority
-        >
-          Priority
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Email" />
+    ),
+
     cell: ({ row }) => {
       const priority = row.original.priority;
       return (
