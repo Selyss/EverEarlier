@@ -17,6 +17,7 @@ import {
   type VisibilityState,
 } from "@tanstack/react-table";
 
+import AddTask from "@/components/AddTask";
 import {
   Table,
   TableBody,
@@ -68,7 +69,10 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center py-4">
-        <DataTableFilter table={table} />
+        <div className="flex flex-row gap-4">
+          <AddTask />
+          <DataTableFilter table={table} />
+        </div>
         <DropdownMenu>
           <DataTableViewOptions table={table} />
         </DropdownMenu>

@@ -14,7 +14,7 @@ export function DataTableFilter<TData, TValue>({
   return (
     <div>
       <Input
-        placeholder="Filter tasks..."
+        placeholder="Filter by name"
         value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
         onChange={(event) =>
           table.getColumn("name")?.setFilterValue(event.target.value)
