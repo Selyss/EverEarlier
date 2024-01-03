@@ -90,7 +90,7 @@ export default function AddTask() {
   );
 }
 
-export function TaskForm() {
+function TaskForm() {
   const form = useForm<z.infer<typeof TaskSchema>>({
     resolver: zodResolver(TaskSchema),
   });
