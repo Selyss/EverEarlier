@@ -4,6 +4,7 @@ import { ModeToggle } from "@/components/ModeToggle";
 import Layout from "../layouts/Layout.astro";
 import TodoList from "@/components/Page";
 import AddTask from "@/components/AddTask";
+import { App } from "@/components/App";
 ---
 
 <script is:inline>
@@ -32,24 +33,13 @@ import AddTask from "@/components/AddTask";
 
 <Layout title="EverEarlier">
   <main>
-    <div class="pt-4 pl-4">
-      <h2 class="text-2xl font-bold tracking-tight">EverEarlier</h2>
-      <p class="text-lg text-muted-foreground">Let's crush some tasks!</p>
-    </div>
-
     <div class="fixed top-0 right-0 z-39 p-4">
       <ModeToggle client:idle />
     </div>
-    <TodoList client:load />
-    <AddTask client:load />
+    <div class="h-lvh">
+      <App client:load />
+    </div>
   </main>
-
-  <style>
-    main {
-      margin: auto;
-      width: 800px;
-      font-size: 20px;
-      line-height: 1.6;
-    }
-  </style>
 </Layout>
+
+<style></style>

@@ -44,6 +44,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { PlusCircledIcon } from "@radix-ui/react-icons";
+
 export default function AddTask() {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -52,7 +54,10 @@ export default function AddTask() {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Add Task</Button>
+          <Button variant="outline">
+            <PlusCircledIcon className="mr-2 h-4 w-4" />
+            Add task
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -70,7 +75,7 @@ export default function AddTask() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Add Task</Button>
+        <Button variant="outline">Add task</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
