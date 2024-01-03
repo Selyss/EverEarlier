@@ -1,17 +1,14 @@
 "use client";
 
+import { DataTableViewOptions } from "@/components/table/ColumnToggle";
 import { DataTablePagination } from "@/components/table/Pagination";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 
 import {
   flexRender,
@@ -35,8 +32,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { DataTableFilter } from "@/components/table/Filter";
 import * as React from "react";
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -77,25 +74,9 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter task name..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+        <DataTableFilter table={table} />
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              size="sm"
-              className="ml-auto hidden h-8 lg:flex"
-            >
-              <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-              View
-            </Button>
-          </DropdownMenuTrigger>
+          <DataTableViewOptions table={table} />
           <DropdownMenuContent align="end" className="w-[150px]">
             <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -174,6 +155,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <DataTablePagination table={table} />
+
       <div className="flex-1 text-sm text-muted-foreground">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
