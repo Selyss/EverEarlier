@@ -4,7 +4,6 @@ import { ModeToggle } from "@/components/ModeToggle";
 import Layout from "../layouts/Layout.astro";
 import TodoList from "@/components/Page";
 import AddTask from "@/components/AddTask";
-import { App } from "@/components/App";
 ---
 
 <script is:inline>
@@ -36,10 +35,14 @@ import { App } from "@/components/App";
     <div class="fixed top-0 right-0 z-39 p-4">
       <ModeToggle client:idle />
     </div>
-    <div class="h-lvh">
-      <App client:load />
-    </div>
+    <TodoList client:load />
+    <AddTask client:load />
   </main>
-</Layout>
 
-<style></style>
+  <style>
+    main {
+      margin: auto;
+      width: 800px;
+    }
+  </style>
+</Layout>
