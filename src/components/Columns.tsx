@@ -46,7 +46,7 @@ export const columns: ColumnDef<Task>[] = [
       const priority = row.original.priority;
       return (
         <Badge
-          className="text-sm"
+          className="text-xs py-0.5 px-2"
           variant={
             priority === "High"
               ? "destructive"
