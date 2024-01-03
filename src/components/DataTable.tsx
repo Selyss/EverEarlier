@@ -2,13 +2,7 @@
 
 import { DataTableViewOptions } from "@/components/table/ColumnToggle";
 import { DataTablePagination } from "@/components/table/Pagination";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu } from "@/components/ui/dropdown-menu";
 
 import {
   flexRender,
@@ -33,6 +27,7 @@ import {
 } from "@/components/ui/table";
 
 import { DataTableFilter } from "@/components/table/Filter";
+import { DataTableSelection } from "@/components/table/Selection";
 import * as React from "react";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -77,31 +72,6 @@ export function DataTable<TData, TValue>({
         <DataTableFilter table={table} />
         <DropdownMenu>
           <DataTableViewOptions table={table} />
-          <DropdownMenuContent align="end" className="w-[150px]">
-            <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {table
-              .getAllColumns()
-              .filter(
-                (column) =>
-                  typeof column.accessorFn !== "undefined" &&
-                  column.getCanHide()
-              )
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
         </DropdownMenu>
       </div>
       <div className="rounded-md border">
@@ -155,11 +125,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <DataTablePagination table={table} />
-
-      <div className="flex-1 text-sm text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
+      <DataTableSelection table={table} />
     </div>
   );
 }
