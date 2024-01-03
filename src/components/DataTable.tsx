@@ -27,7 +27,6 @@ import {
 } from "@/components/ui/table";
 
 import { DataTableFilter } from "@/components/table/Filter";
-import { DataTableSelection } from "@/components/table/Selection";
 import * as React from "react";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -125,7 +124,6 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <DataTablePagination table={table} />
-      <DataTableSelection table={table} />
     </div>
   );
 }
