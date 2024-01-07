@@ -28,8 +28,8 @@ export const columns: ColumnDef<Task>[] = [
             priority === "High"
               ? "destructive"
               : priority === "Medium"
-              ? "secondary"
-              : "outline"
+                ? "secondary"
+                : "outline"
           }
         >
           {priority}
@@ -43,11 +43,18 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const progress = row.original.progress;
       return (
-        <Progress
-          value={
-            progress === "To Do" ? 0 : progress === "In Progress" ? 50 : 100
+        <Badge
+          className="text-xs py-0.5 px-2"
+          variant={
+            progress === "Completed"
+              ? "destructive"
+              : progress === "In Progress"
+                ? "secondary"
+                : "outline"
           }
-        />
+        >
+          {progress}
+        </Badge>
       );
     },
   },
