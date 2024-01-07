@@ -6,7 +6,11 @@ import { type ColumnDef } from "@tanstack/react-table";
 
 import TaskDropdown from "@/components/TaskDropdown";
 import { DataTableColumnHeader } from "@/components/table/ColumnHeader";
-import { Progress } from "@/components/ui/progress";
+import {
+  CheckCircledIcon,
+  CircleIcon,
+  StopwatchIcon,
+} from "@radix-ui/react-icons";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -28,8 +32,8 @@ export const columns: ColumnDef<Task>[] = [
             priority === "High"
               ? "destructive"
               : priority === "Medium"
-                ? "secondary"
-                : "outline"
+              ? "warning"
+              : "success"
           }
         >
           {priority}
@@ -42,19 +46,12 @@ export const columns: ColumnDef<Task>[] = [
     header: "Progress",
     cell: ({ row }) => {
       const progress = row.original.progress;
-      return (
-        <Badge
-          className="text-xs py-0.5 px-2"
-          variant={
-            progress === "Completed"
-              ? "destructive"
-              : progress === "In Progress"
-                ? "secondary"
-                : "outline"
-          }
-        >
-          {progress}
-        </Badge>
+      return progress === "Completed" ? (
+        <CheckCircledIcon className="w-5 h-5 text-green-500" />
+      ) : progress === "In Progress" ? (
+        <StopwatchIcon className="w-5 h-5 text-yellow-500" />
+      ) : (
+        <CircleIcon className="w-5 h-5 text-gray-500" />
       );
     },
   },
