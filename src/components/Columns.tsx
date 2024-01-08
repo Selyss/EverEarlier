@@ -7,6 +7,9 @@ import { type ColumnDef } from "@tanstack/react-table";
 import TaskDropdown from "@/components/TaskDropdown";
 import { DataTableColumnHeader } from "@/components/table/ColumnHeader";
 import {
+  ArrowDownIcon,
+  ArrowRightIcon,
+  ArrowUpIcon,
   CheckCircledIcon,
   CircleIcon,
   StopwatchIcon,
@@ -35,9 +38,20 @@ export const columns: ColumnDef<Task>[] = [
               ? "destructive"
               : priority === Priority.Medium
               ? "warning"
-              : "success"
+              : priority === Priority.Low
+              ? "success"
+              : "outline"
           }
         >
+          {priority === Priority.High && (
+            <ArrowUpIcon className="w-4 h-4 mr-1" />
+          )}
+          {priority === Priority.Medium && (
+            <ArrowRightIcon className="w-4 h-4 mr-1" />
+          )}
+          {priority === Priority.Low && (
+            <ArrowDownIcon className="w-4 h-4 mr-1" />
+          )}
           {priority}
         </Badge>
       );
