@@ -1,6 +1,6 @@
 "use client";
 
-import { type Task } from "@/components/Task";
+import { Priority, Progress, type Task } from "@/components/Task";
 import { Badge } from "@/components/ui/badge";
 import { type ColumnDef } from "@tanstack/react-table";
 
@@ -15,7 +15,9 @@ import {
 export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "name",
-    header: "Task",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Task" />
+    ),
   },
   {
     accessorKey: "priority",
@@ -29,9 +31,9 @@ export const columns: ColumnDef<Task>[] = [
         <Badge
           className="text-xs py-0.5 px-2"
           variant={
-            priority === "High"
+            priority === Priority.High
               ? "destructive"
-              : priority === "Medium"
+              : priority === Priority.Medium
               ? "warning"
               : "success"
           }
@@ -43,23 +45,32 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "progress",
-    header: "Progress",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Progress" />
+    ),
     cell: ({ row }) => {
       const progress = row.original.progress;
-      return progress === "Completed" ? (
-        <CheckCircledIcon className="w-5 h-5 text-green-500" />
-      ) : progress === "In Progress" ? (
-        <StopwatchIcon className="w-5 h-5 text-yellow-500" />
+      return progress === Progress.Completed ? (
+        <div className="flex align-center gap-2 items-center">
+          <CheckCircledIcon className="w-5 h-5 text-green-500" />
+          <span>Completed</span>
+        </div>
+      ) : progress === Progress.In_Progress ? (
+        <div className="flex align-center gap-2 items-center">
+          <StopwatchIcon className="w-5 h-5 text-yellow-500" />
+          <span>In Progress</span>
+        </div>
       ) : (
-        <CircleIcon className="w-5 h-5 text-gray-500" />
+        <div className="flex align-center gap-2 items-center">
+          <CircleIcon className="w-5 h-5 text-gray-500" />
+          <span>To Do</span>
+        </div>
       );
     },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
-
       return <TaskDropdown {...row} />;
     },
   },

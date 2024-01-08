@@ -2,22 +2,34 @@ import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import * as z from "zod";
 
+export enum Priority {
+  High = "High",
+  Medium = "Medium",
+  Low = "Low",
+}
+
+export enum Progress {
+  Completed = "Completed",
+  In_Progress = "In Progress",
+  To_Do = "To Do",
+}
+
 // submission validation schema
 export const TaskSchema = z.object({
   name: z.string().min(1, {
     message: "Title must not be empty.",
   }),
   description: z.string().optional(),
-  priority: z.enum(["High", "Medium", "Low"]),
-  progress: z.enum(["To Do", "In Progress", "Completed"]),
+  priority: z.nativeEnum(Priority),
+  progress: z.nativeEnum(Progress),
 });
 
 export type Task = {
   name: string;
   description: string;
   id: string;
-  priority: "High" | "Medium" | "Low";
-  progress: "To Do" | "In Progress" | "Completed";
+  priority: Priority;
+  progress: Progress;
 };
 
 /* generate unique task id */
