@@ -46,8 +46,13 @@ import {
 
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 
-export default function AddTask() {
+export default function AddTask({
+  addTask,
+}: {
+  addTask: (task: Task) => void;
+}) {
   const [open, setOpen] = React.useState(false);
+
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
@@ -66,7 +71,7 @@ export default function AddTask() {
               Add a new task to your list. Click save when you're done.
             </DialogDescription> */}
           </DialogHeader>
-          <TaskForm />
+          <TaskForm callback={addTask} />
         </DialogContent>
       </Dialog>
     );
@@ -84,7 +89,7 @@ export default function AddTask() {
             Add a new task to your list. Click save when you're done.
           </DrawerDescription> */}
         </DrawerHeader>
-        <TaskForm />
+        <TaskForm callback={addTask} />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -95,13 +100,14 @@ export default function AddTask() {
   );
 }
 
-function TaskForm() {
+function TaskForm({ callback }: { callback: (task: Task) => void }) {
   const form = useForm<z.infer<typeof TaskSchema>>({
     resolver: zodResolver(TaskSchema),
   });
 
   function onSubmit(values: z.infer<typeof TaskSchema>) {
     createTask(values as Task);
+    callback(values as Task);
   }
 
   return (

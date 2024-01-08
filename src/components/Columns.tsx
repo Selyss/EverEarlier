@@ -37,10 +37,10 @@ export const columns: ColumnDef<Task>[] = [
             priority === Priority.High
               ? "destructive"
               : priority === Priority.Medium
-              ? "warning"
-              : priority === Priority.Low
-              ? "success"
-              : "outline"
+                ? "warning"
+                : priority === Priority.Low
+                  ? "success"
+                  : "outline"
           }
         >
           {priority === Priority.High && (
