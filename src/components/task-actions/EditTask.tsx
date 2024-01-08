@@ -55,8 +55,8 @@ const EditTask: React.FC<EditTaskProps> = ({ task, onTaskUpdated }) => {
 
   const onSubmit = (values: z.infer<typeof TaskSchema>) => {
     toast("Task updated: " + values.name);
-    updateTask(values);
-    onTaskUpdated(values);
+    updateTask(values as Task);
+    onTaskUpdated(values as Task);
     setOpen(false);
   };
 

@@ -71,7 +71,7 @@ export default function AddTask({
               Add a new task to your list. Click save when you're done.
             </DialogDescription> */}
           </DialogHeader>
-          <TaskForm callback={addTask} />
+          <TaskForm callback={addTask} close={() => setOpen(false)} />
         </DialogContent>
       </Dialog>
     );
@@ -89,7 +89,7 @@ export default function AddTask({
             Add a new task to your list. Click save when you're done.
           </DrawerDescription> */}
         </DrawerHeader>
-        <TaskForm callback={addTask} />
+        <TaskForm callback={addTask} close={() => setOpen(false)} />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -100,7 +100,13 @@ export default function AddTask({
   );
 }
 
-function TaskForm({ callback }: { callback: (task: Task) => void }) {
+function TaskForm({
+  callback,
+  close,
+}: {
+  callback: (task: Task) => void;
+  close: () => void;
+}) {
   const form = useForm<z.infer<typeof TaskSchema>>({
     resolver: zodResolver(TaskSchema),
   });
@@ -108,6 +114,7 @@ function TaskForm({ callback }: { callback: (task: Task) => void }) {
   function onSubmit(values: z.infer<typeof TaskSchema>) {
     createTask(values as Task);
     callback(values as Task);
+    close();
   }
 
   return (
