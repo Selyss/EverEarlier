@@ -61,7 +61,7 @@ export default function AddTask({
         <DialogTrigger asChild>
           <Button variant="outline">
             <PlusCircledIcon className="mr-2 h-4 w-4" />
-            Add task
+            <span>Add task</span>
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">

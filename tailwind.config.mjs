@@ -15,7 +15,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Geist-Regular", "system-ui", ...defaultTheme.fontFamily.sans],
+        sans: ["system-ui", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         border: "hsl(var(--border))",
