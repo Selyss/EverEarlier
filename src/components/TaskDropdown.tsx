@@ -29,7 +29,7 @@ export default function TaskDropdown(row: Row<Task>): JSX.Element {
       <DropdownMenuContent align="end">
         <DropdownMenuItem
           onClick={() => {
-            setEditingTask(row.original);
+            // setEditingTask(row.original);
             setIsEditDialogOpen(true);
           }}
         >

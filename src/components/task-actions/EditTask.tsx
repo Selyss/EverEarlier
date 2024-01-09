@@ -82,7 +82,11 @@ const EditTask: React.FC<EditTaskProps> = ({ task, onTaskUpdated }) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Priority</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                name="edit-priority"
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Task priority" />
@@ -104,7 +108,11 @@ const EditTask: React.FC<EditTaskProps> = ({ task, onTaskUpdated }) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Progress</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                name="edit-progress"
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Task progress" />

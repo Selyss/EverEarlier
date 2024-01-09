@@ -127,7 +127,11 @@ function TaskForm({
             <FormItem>
               <FormLabel>Task Name</FormLabel>
               <FormControl>
-                <Input placeholder="I need to..." {...field} />
+                <Input
+                  placeholder="I need to..."
+                  {...field}
+                  autoComplete="off"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -139,10 +143,14 @@ function TaskForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Priority</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                name="task-priority"
+              >
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Task priority" />
+                    <SelectValue id="priority" placeholder="Task priority" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -161,7 +169,11 @@ function TaskForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Progress</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                name="task-progress"
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Task progress" />

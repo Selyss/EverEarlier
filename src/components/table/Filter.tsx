@@ -20,6 +20,7 @@ export function DataTableFilter<TData, TValue>({
           table.getColumn("name")?.setFilterValue(event.target.value)
         }
         className="max-w-sm"
+        name="filter"
       />
     </div>
   );
