@@ -37,10 +37,10 @@ export const columns: ColumnDef<Task>[] = [
             priority === Priority.High
               ? "destructive"
               : priority === Priority.Medium
-                ? "warning"
-                : priority === Priority.Low
-                  ? "success"
-                  : "outline"
+              ? "warning"
+              : priority === Priority.Low
+              ? "success"
+              : "outline"
           }
         >
           {priority === Priority.High && (
@@ -67,17 +67,17 @@ export const columns: ColumnDef<Task>[] = [
       return progress === Progress.Completed ? (
         <div className="flex align-center gap-2 items-center">
           <CheckCircledIcon className="w-5 h-5 text-green-500" />
-          <span>Completed</span>
+          <span className="text-gray-400">Completed</span>
         </div>
       ) : progress === Progress.In_Progress ? (
         <div className="flex align-center gap-2 items-center">
           <StopwatchIcon className="w-5 h-5 text-yellow-500" />
-          <span>In Progress</span>
+          <span className="text-gray-400">In Progress</span>
         </div>
       ) : (
         <div className="flex align-center gap-2 items-center">
           <CircleIcon className="w-5 h-5 text-gray-500" />
-          <span>To Do</span>
+          <span className="text-gray-400">To Do</span>
         </div>
       );
     },
