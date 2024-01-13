@@ -75,18 +75,6 @@ export function updateTask(updatedTask: Task): void {
   }
 }
 
-/* duplicate a task */
-export function duplicateTask(taskId: string): void {
-  const tasks = getTasks();
-  const taskToDuplicate = tasks.find((task) => task.id === taskId);
-  if (taskToDuplicate) {
-    const duplicatedTask = { ...taskToDuplicate, id: generateTaskId() };
-    tasks.push(duplicatedTask);
-    saveTasks(tasks);
-    toast.success("Task: " + duplicatedTask.name + " has been duplicated");
-  }
-}
-
 /* delete a task */
 function deleteTask(taskId: string): void {
   const tasks = getTasks();

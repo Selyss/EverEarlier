@@ -35,7 +35,6 @@ export default function TaskDropdown(row: Row<Task>): JSX.Element {
         >
           Edit
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => true}>Duplicate</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => row.original.id}>
           Delete
